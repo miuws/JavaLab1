@@ -10,6 +10,7 @@ import java.util.*;
 public class Graph
 {
 	public static int INFINITY = 999;
+	public static int MIN = -1;
 
 	class Edge
 	{
