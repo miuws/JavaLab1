@@ -1,4 +1,4 @@
-// 第一次修改
+// Graph class
 import java.util.ArrayList;
 
 public class Graph

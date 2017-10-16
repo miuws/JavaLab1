@@ -1,4 +1,4 @@
-// 第一次修改
+// Edge class
 import java.util.Objects;
 
 class Edge

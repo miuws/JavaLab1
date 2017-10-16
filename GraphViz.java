@@ -1,4 +1,4 @@
-// 第一次修改
+// GraphViz class
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
