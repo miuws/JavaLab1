@@ -1,5 +1,4 @@
 // GraphViz class
-// Change in c4
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
