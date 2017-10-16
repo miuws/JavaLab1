@@ -1,5 +1,6 @@
 // Edge class
 // change 
+// 666
 import java.util.Objects;
 
 class Edge
