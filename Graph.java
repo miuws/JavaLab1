@@ -1,4 +1,5 @@
 // Graph class
+// Change in b2
 import java.util.ArrayList;
 
 public class Graph

@@ -1,4 +1,5 @@
 // Edge class
+// Change in b2
 import java.util.Objects;
 
 class Edge
