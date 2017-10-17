@@ -2,22 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="46086109-ddbb-48ff-bf41-0a18984e4589" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BugsReport.md" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/JavaLab1/com/intellij/uiDesigner/core/AbstractLayout.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/JavaLab1/com/intellij/uiDesigner/core/DimensionInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/JavaLab1/com/intellij/uiDesigner/core/GridConstraints.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/JavaLab1/com/intellij/uiDesigner/core/GridLayoutManager.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/JavaLab1/com/intellij/uiDesigner/core/HorizontalInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/JavaLab1/com/intellij/uiDesigner/core/LayoutState.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/JavaLab1/com/intellij/uiDesigner/core/Spacer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/JavaLab1/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/JavaLab1/com/intellij/uiDesigner/core/SupportCode.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/JavaLab1/com/intellij/uiDesigner/core/Util.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/JavaLab1/com/intellij/uiDesigner/core/VerticalInfo.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DotGraph.jpg" afterPath="$PROJECT_DIR$/DotGraph.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/JavaLab1/Graph.class" afterPath="$PROJECT_DIR$/out/production/JavaLab1/Graph.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dotsource.dot" afterPath="$PROJECT_DIR$/dotsource.dot" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MainPage.java" afterPath="$PROJECT_DIR$/src/MainPage.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -37,8 +21,8 @@
       <file leaf-file-name="MainPage.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MainPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="456" column="31" lean-forward="true" selection-start-line="456" selection-start-column="31" selection-end-line="456" selection-end-column="31" />
+            <state relative-caret-position="315">
+              <caret line="464" column="59" lean-forward="true" selection-start-line="464" selection-start-column="59" selection-end-line="464" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -386,12 +370,12 @@
       <workItem from="1506333920431" duration="2730000" />
       <workItem from="1506336793240" duration="598000" />
       <workItem from="1506340683727" duration="4950000" />
-      <workItem from="1508246115911" duration="935000" />
+      <workItem from="1508246115911" duration="1082000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110275000" />
+    <option name="totallyTimeSpent" value="110422000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
@@ -672,8 +656,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MainPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="456" column="31" lean-forward="true" selection-start-line="456" selection-start-column="31" selection-end-line="456" selection-end-column="31" />
+        <state relative-caret-position="315">
+          <caret line="464" column="59" lean-forward="true" selection-start-line="464" selection-start-column="59" selection-end-line="464" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
