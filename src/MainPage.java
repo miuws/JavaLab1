@@ -465,6 +465,7 @@ public class MainPage extends JFrame
         setLocationRelativeTo(null);                // 居中显示
         setExtendedState(JFrame.MAXIMIZED_BOTH);    // 初始最大化
         setTextBoard("处理后的文本","读入的文本");
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     private MainPage()
