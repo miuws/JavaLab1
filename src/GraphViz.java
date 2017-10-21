@@ -35,7 +35,7 @@ public class GraphViz {
     /**
      * Detects the client's operating system.
      */
-    private final static String osName = System.getProperty("os.name").replaceAll("\\s", "");
+    private final static String     osName = System.getProperty("os.name").replaceAll("\\s", "");
 
     /**
      * Load the config.properties file.
@@ -46,7 +46,10 @@ public class GraphViz {
         {
             try {
                 load(new FileInputStream(cfgProp));
-            } catch (Exception e) {}
+            } catch (Exception e) {
+                // FIX by Find Bugs
+                throw new RuntimeException(e);
+            }
         }
     };
 
@@ -309,15 +312,14 @@ public class GraphViz {
     public void readSource(String input) {
         StringBuilder sb = new StringBuilder();
 
-        try {
-            FileInputStream fis = new FileInputStream(input);
-            DataInputStream dis = new DataInputStream(fis);
-            BufferedReader br = new BufferedReader(new InputStreamReader(dis));
+        // FIX by Find Bugs
+        try (FileInputStream fis = new FileInputStream(input);
+             DataInputStream dis = new DataInputStream(fis);
+             BufferedReader br = new BufferedReader(new InputStreamReader(dis));){
             String line;
             while ((line = br.readLine()) != null) {
                 sb.append(line);
             }
-            dis.close();
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
