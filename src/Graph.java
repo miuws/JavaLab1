@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Graph
 {
@@ -10,7 +11,9 @@ public class Graph
     private int pointNumber;
 
     // 动态存储节点
-    private ArrayList<ArrayList<Edge>> memory = new ArrayList<>();
+    // FIX by PMD -- ruleset 'coupling'
+    // use interface 'List' instead of implementation 'ArrayList'
+    private List<List<Edge>> memory = new ArrayList<>();
 
     // 待染色的节点
     private ArrayList<Integer> toColorPoints = new ArrayList<>();
@@ -31,12 +34,10 @@ public class Graph
     // 添加一条边
     public void addEdge(int from,int to)
     {
-        for(int i=0;i<memory.get(from).size();i++)
-        {
-            if(memory.get(from).get(i).getTo()==to)
-            {
-                int w=memory.get(from).get(i).getValue();
-                memory.get(from).get(i).setValue(w+1);
+        for(int i = 0; i < memory.get(from).size(); i++) {
+            if (memory.get(from).get(i).getTo() == to) {
+                int w = memory.get(from).get(i).getValue();
+                memory.get(from).get(i).setValue(w + 1);
                 return;
             }
         }
@@ -48,20 +49,20 @@ public class Graph
         int[] dist = new int[pointNumber];
         boolean[] vis = new boolean[pointNumber];
         int[] pre = new int[pointNumber];
-        final int INF=0x3f3f3f3f;
+        final int INF = 0x3f3f3f3f;
         for(int i=0;i<pointNumber;i++)
         {
-            dist[i]=INF;
-            vis[i]=false;
-            pre[i]=-1;
+            dist[i] = INF;
+            vis[i] = false;
+            pre[i] = -1;
         }
-        dist[from]=0;
-        pre[from]=-1;
+        dist[from] = 0;
+        pre[from] =- 1;
         for(int t=0;t<pointNumber;t++)
         {
-            int minDist=INF;
-            int u=-1;
-            for(int i=0;i<pointNumber;i++)
+            int minDist = INF;
+            int u =- 1;
+            for(int i = 0; i < pointNumber; i++)
                 if(!vis[i] && dist[i]<minDist)
                 {
                     minDist=dist[i];
@@ -140,9 +141,9 @@ public class Graph
                 memory.get(i).get(j).setVis(false);
     }
     // 找出随机游走可选的边
-    private ArrayList<Integer> getToSelect(ArrayList<Edge> s)
+    private List<Integer> getToSelect(List<Edge> s)
     {
-        ArrayList<Integer> ret = new ArrayList<>();
+        List<Integer> ret = new ArrayList<>();
         for(int i=0;i<s.size();i++)
             if(!s.get(i).getVis())
                 ret.add(i);
@@ -151,8 +152,12 @@ public class Graph
     // 随机游走一步
     public Edge randomWalkStep()
     {
-        ArrayList<Integer> toSelect= getToSelect(memory.get(randomWalkStart));
-        if(toSelect.size()==0) return new Edge(-1,-1,-1);
+        List<Integer> toSelect= getToSelect(memory.get(randomWalkStart));
+
+        // Fix By PMD --- ruleset 'design'
+        if(toSelect.isEmpty()){
+            return new Edge(-1,-1,-1);
+        }
         if(randomWalkLast!=-1)
         {
             for(int i=0;i<memory.get(randomWalkLast).size();i++)
@@ -202,7 +207,7 @@ public class Graph
     public ArrayList<Edge> getAllEdges()
     {
         ArrayList<Edge> ret=new ArrayList<>();
-        for (ArrayList<Edge> aMemory : memory)
+        for (List<Edge> aMemory : memory)
             ret.addAll(aMemory);
         return ret;
     }
@@ -211,7 +216,7 @@ public class Graph
     public void clearColor()
     {
         toColorPoints.clear();
-        for (ArrayList<Edge> aMemory : memory)
+        for (List<Edge> aMemory : memory)
             for (Edge anAMemory : aMemory) anAMemory.setColor("black");
     }
 
@@ -246,17 +251,19 @@ public class Graph
         // 测试从0到3的路径
         tmpInt=g.getWays(0,3);
         for (Integer aTmpInt : tmpInt) System.out.println(aTmpInt);
-        System.out.printf("----------------------\n");
+
+        // FIX by Find Bugs
+        System.out.printf("----------------------%n");
 
         // 测试所有边
         tmpEdge=g.getAllEdges();
         for (Edge aTmpEdge : tmpEdge) System.out.printf("%d -> %d\n", aTmpEdge.getFrom(), aTmpEdge.getTo());
-        System.out.printf("----------------------\n");
+        System.out.printf("----------------------%n");
 
         // 测试最短路
         tmpInt=g.findShortestPath(0,3);
         for (Integer aTmpInt : tmpInt) System.out.println(aTmpInt);
-        System.out.printf("----------------------\n");
+        System.out.printf("----------------------%n");
 
         // 测试随机游走
         g.randomWalk();

@@ -32,48 +32,19 @@ public class TextMaker
         graph.addPoint();
     }
 
-    private boolean isPunc(char c)
-    {
-        if(c==',') return true;
-        if(c=='.') return true;
-        if(c=='?') return true;
-        if(c=='!') return true;
-        if(c==':') return true;
-        if(c==';') return true;
-        if(c=='(') return true;
-        if(c==')') return true;
-        if(c=='[') return true;
-        if(c==']') return true;
-        if(c=='{') return true;
-        if(c=='}') return true;
-        return false;
-    }
+    // FIX by review
+    // method 'bool isPunc(char c)' deleted
+
     private String preHandleLine(String line) // 去掉行中不合法字符
     {
-        StringBuilder ret= new StringBuilder();
-        for(int i=0;i<line.length();i++)
-        {
-            if (!(line.charAt(i)>=65&&line.charAt(i)<=90 || line.charAt(i)>=97&&line.charAt(i)<=122
-                    || isPunc(line.charAt(i)) || line.charAt(i)==' '))
-                ret.append(' ');
-            else ret.append(line.charAt(i));
-        }
-        return ret.toString();
+        // FIX by review
+        return line.replaceAll("[^\\da-zA-Z,.?!:;()\\[\\]{} ]+", "");
     }
 
     private String[] getWordFromLine(String line)   // 把行中的单词抽出来
     {
-        StringBuilder ret= new StringBuilder();
-        for(int i=0;i<line.length();i++)
-        {
-            if (isPunc(line.charAt(i)) || line.charAt(i)==' ')
-            {
-                if(ret.length()!=0 && ret.charAt(ret.length()-1)!=' ')
-                    ret.append(' ');
-            }
-            else ret.append(line.charAt(i));
-        }
-        return ret.toString().split(" ");
+        // FIX by review
+        return line.replaceAll("[,.?!:;()\\[\\]{} ]+", " ").split(" ");
     }
 
     private void solveLine(String line)         // 处理一行文本，把一行中的单词都加入图中
@@ -157,10 +128,14 @@ public class TextMaker
         }
         for(int i=0;i<colorOfWords.length;i++)
         {
+            // FIX by review
             if(Objects.equals(colorOfWords[i], "red"))
-                graphString.append(getWord(i)).append("[style=").append("filled").append(", color=").append(colorOfWords[i]).append("];\n");
+                graphString.append("\""  + getWord(i) + "\"" ).
+                        append("[style=").append("filled").append(", color=").
+                        append(colorOfWords[i]).append("];\n");
             else
-                graphString.append(getWord(i)).append("[style=").append("solid").append(", color=").append(colorOfWords[i]).append("];\n");
+                graphString.append("\"" + getWord(i) + "\"" )
+                        .append("[style=").append("solid").append(", color=").append(colorOfWords[i]).append("];\n");
         }
         ArrayList<Edge> edges = graph.getAllEdges();
         for (Edge edge : edges) {
@@ -168,7 +143,9 @@ public class TextMaker
             int v = edge.getTo();
             int w = edge.getValue();
             String color=edge.getColor();
-            graphString.append(getWord(u)).append("->").append(getWord(v));
+
+            // FIX by review
+            graphString.append("\"" + getWord(u) + "\"").append("->").append("\""  + getWord(v) + "\"" );
             graphString.append("[");
             graphString.append("label=").append(w);
             graphString.append(", color=").append(color);
@@ -220,7 +197,7 @@ public class TextMaker
     }
     public ArrayList<String> findShortestPath(String from,String to)
     {
-        if(getWordIndex(from)==-1 || getWordIndex(to)==-1) return null;
+        if(getWordIndex(from)==-1 || getWordIndex(to) == -1) return null;
         ArrayList<String> ret=int2stringArrayList(graph.findShortestPath(getWordIndex(from),getWordIndex(to)));
         exhibitGraph();
         return ret;
@@ -230,9 +207,9 @@ public class TextMaker
     public String getNewTextFromBridge(String line)
     {
         line=preHandleLine(line);
-        String words[]=getWordFromLine(line);
-        StringBuilder ret= new StringBuilder();
-        for(int i=0;i<words.length-1;i++)
+        String words[] = getWordFromLine(line);
+        StringBuilder ret = new StringBuilder();
+        for(int i = 0; i < words.length - 1; i++)
         {
             ArrayList<String> bridgeWords=getBridgeWords(words[i],words[i+1]);
             ret.append(words[i]).append(" ");
@@ -265,7 +242,9 @@ public class TextMaker
     public static void main(String[] args)
     {
         TextMaker textMaker = new TextMaker();
-        textMaker.readText("C:\\Users\\ghzha\\IdeaProjects\\JavaLab1\\test.txt");
+        // Fix By Find Bugs
+        final String path = ".\\test.txt";
+        textMaker.readText(path);
         textMaker.addText("Hello????baby...\nThis is ghzhang's testing!");
         System.out.println("--------------------------------");
         System.out.println(textMaker.getOriginText());

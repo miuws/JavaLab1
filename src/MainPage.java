@@ -15,19 +15,19 @@ public class MainPage extends JFrame
     private Container pane =getContentPane();
 
     // 菜单项
-    private JMenu menu0=new JMenu("文件");
-    private JMenuItem menu0_1=new JMenuItem("打开");
-    private JMenuItem menu0_2=new JMenuItem("退出");
-    private JMenu menu1=new JMenu("功能");
-    private JMenuItem menu1_1=new JMenuItem("1. 展示有向图");
-    private JMenuItem menu1_2=new JMenuItem("2. 查询桥接词");
-    private JMenuItem menu1_3=new JMenuItem("3. 添加新文本");
-    private JMenuItem menu1_4=new JMenuItem("4. 生成新文本");
-    private JMenuItem menu1_5=new JMenuItem("5. 计算最短路径");
-    private JMenuItem menu1_6=new JMenuItem("6. 随机游走");
-    private JMenu menu2=new JMenu("帮助");
-    private JMenuItem menu2_1=new JMenuItem("使用帮助");
-    private JMenuItem menu2_2=new JMenuItem("关于作者");
+    private JMenu menu0 = new JMenu("文件");
+    private JMenuItem menu0_1 = new JMenuItem("打开");
+    private JMenuItem menu0_2 = new JMenuItem("退出");
+    private JMenu menu1 = new JMenu("功能");
+    private JMenuItem menu1_1 = new JMenuItem("1. 展示有向图");
+    private JMenuItem menu1_2 = new JMenuItem("2. 查询桥接词");
+    private JMenuItem menu1_3 = new JMenuItem("3. 添加新文本");
+    private JMenuItem menu1_4 = new JMenuItem("4. 生成新文本");
+    private JMenuItem menu1_5 = new JMenuItem("5. 计算最短路径");
+    private JMenuItem menu1_6 = new JMenuItem("6. 随机游走");
+    private JMenu menu2 = new JMenu("帮助");
+    private JMenuItem menu2_1 = new JMenuItem("使用帮助");
+    private JMenuItem menu2_2 = new JMenuItem("关于作者");
 
     // 放置有向图的面板
     private JPanel directedGraphPanel = new JPanel();
@@ -50,9 +50,9 @@ public class MainPage extends JFrame
 
     // 查询最短路使用
     private JDialog findPathFrame = new JDialog();
-    private JTextField findPathWord1= new JTextField(25);
-    private JTextField findPathWord2= new JTextField(25);
-    private JButton findPathSubmit= new JButton("确认");
+    private JTextField findPathWord1 = new JTextField(25);
+    private JTextField findPathWord2 = new JTextField(25);
+    private JButton findPathSubmit = new JButton("确认");
 
     // 随机游走使用
     private JMenuItem walkStartMenu = new JMenuItem("开始");
@@ -63,58 +63,66 @@ public class MainPage extends JFrame
     private JFrame infoBoard = new JFrame();
 
     // 展示文本使用
-    private JPanel TextInfoPanel=new JPanel();
+    private JPanel TextInfoPanel = new JPanel();
 
     // 功能按钮监听
     private class ButtonListener implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
         {
-            JButton button=(JButton) e.getSource();
+            JButton button = (JButton) e.getSource();
             if(button==querySubmit)         // 查询桥接词
             {
-                ArrayList<String> bridgeWords= textMaker.getBridgeWords(queryWord1.getText(),queryWord2.getText());
-                StringBuilder bridge= new StringBuilder();
-                if(bridgeWords==null) bridge.append("所查询的单词不存在！");
-                else if(bridgeWords.size()==0) bridge.append("所查询的单词之间无桥接词！");
-                else for (String bridgeWord : bridgeWords) bridge.append(bridgeWord).append("\n");
+                ArrayList<String> bridgeWords = textMaker.getBridgeWords(queryWord1.getText(),queryWord2.getText());
+                StringBuilder bridge = new StringBuilder();
+                if(bridgeWords == null){
+                    bridge.append("所查询的单词不存在！");
+                }
+                else if(bridgeWords.size() == 0){
+                    bridge.append("所查询的单词之间无桥接词！");
+                }
+                else {
+                    for (String bridgeWord : bridgeWords) {
+                        bridge.append(bridgeWord).append("\n");
+                    }
+                }
                 showInformation(bridge.toString());
                 showDirectedGraph();
-            }
-            else if(button==addTextSubmit)
+            } else if(button == addTextSubmit)
             {
                 showInformation(textMaker.getNewTextFromBridge(addTextWord.getText()));
-            }
-            else if(button==addSubmit)      // 添加新文本
+            } else if(button == addSubmit)      // 添加新文本
             {
                 textMaker.addText(addWord.getText());
                 textMaker.exhibitGraph();
                 showDirectedGraph();
                 setTextBoard(textMaker.getHandledText(),textMaker.getOriginText());
-            }
-            else if(button==findPathSubmit) // 查找最短路
+            } else if(button == findPathSubmit) // 查找最短路
             {
                 // 查找全部最短路
                 if(Objects.equals(findPathWord2.getText(), ""))
                 {
                     ArrayList<ArrayList<String>> allShortestPathStrings=textMaker.findAllShortestPath(findPathWord1.getText());
                     StringBuilder allShortestPath= new StringBuilder();
-                    if(allShortestPathStrings==null) allShortestPath.append("所查询的单词不存在！");
-                    else
+                    if(allShortestPathStrings == null) {
+                        allShortestPath.append("所查询的单词不存在！");
+                    } else
                     {
-                        for(int i=0;i<allShortestPathStrings.size();i++)
+                        for(int i = 0; i < allShortestPathStrings.size(); i++)
                         {
-                            for(int j=allShortestPathStrings.get(i).size()-1;j>=0;j--)
+                            for(int j = allShortestPathStrings.get(i).size() - 1; j >= 0; j--)
                             {
-                                if(j==allShortestPathStrings.get(i).size()-1)
-                                {
+                                if(j == allShortestPathStrings.get(i).size() - 1) {
                                     allShortestPath.append(allShortestPathStrings.get(i).get(j)).append(": ");
-                                    if(allShortestPathStrings.get(i).size()==1) allShortestPath.append("两单词间无路径!\n");
+                                    if(allShortestPathStrings.get(i).size() == 1) allShortestPath.append("两单词间无路径!\n");
                                     continue;
                                 }
                                 allShortestPath.append(allShortestPathStrings.get(i).get(j));
-                                if(j==0) allShortestPath.append("\n");
-                                else allShortestPath.append("->");
+                                if(j == 0){
+                                    allShortestPath.append("\n");
+                                } else{
+                                    allShortestPath.append("->");
+                                }
                             }
                         }
                     }
@@ -207,13 +215,14 @@ public class MainPage extends JFrame
                         "查询到的桥接词用红色在图中标出。\n";
                 showInformation(help,"使用帮助");
             }
-            else if(menuSource==menu2_2)        // 关于
-            {
-                String about="GUI:张冠华 1150310323\n图:王姗 1150310302\n";
+            else if(menuSource==menu2_2){
+                // 关于
+                String about = "GUI:张冠华 1150310323\n图:王姗 1150310302\n";
                 showInformation(about,"关于作者");
-            }
-            else if(menuSource==menu0_2)        // 退出
+            } else if(menuSource==menu0_2){
+                // 退出
                 System.exit(0);
+            }
             else if(menuSource==walkStartMenu)  // 随机游走开始
             {
                 if(Objects.equals(walkStartMenu.getText(), "开始"))
@@ -310,6 +319,7 @@ public class MainPage extends JFrame
     // 查询添加桥接词界面
     private void setQueryFrame()
     {
+        queryFrame = new JDialog();
         Container queryFramePane = queryFrame.getContentPane();
         queryFrame.setTitle("请输入要查询的桥接词");
         queryFrame.setSize(400,180);
@@ -327,18 +337,19 @@ public class MainPage extends JFrame
         queryFramePane.add(querySubmit);
         queryFrame.setLayout(null);
         queryFrame.setLocationRelativeTo(null);
-        queryFrame.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        queryFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         queryFrame.setVisible(true);
     }
 
     // 展示生成新文本界面
     private void setAddTextFrame()
     {
+        addTextFrame = new JDialog();
         Container addTextFramePane = addTextFrame.getContentPane();
         addTextFrame.setTitle("请输入要生成的文本");
         addTextFrame.setSize(400,180);
 
-        JScrollPane addTextScrollPane=new JScrollPane();
+        JScrollPane addTextScrollPane = new JScrollPane();
         addTextScrollPane.setBounds(20,20,200,100);
         TextInfoPanel.add(addTextScrollPane,BorderLayout.CENTER);
 
@@ -351,13 +362,14 @@ public class MainPage extends JFrame
         addTextFramePane.add(addTextSubmit);
         addTextFrame.setLayout(null);
         addTextFrame.setLocationRelativeTo(null);
-        addTextFrame.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        addTextFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         addTextFrame.setVisible(true);
     }
 
     // 展示添加新文本界面
     private void setAddFrame()
     {
+        addFrame = new JDialog();
         Container addFramePane = addFrame.getContentPane();
         addFrame.setTitle("请输入要添加的新文本");
         addFrame.setSize(400,180);
@@ -375,13 +387,14 @@ public class MainPage extends JFrame
         addFramePane.add(addSubmit);
         addFrame.setLayout(null);
         addFrame.setLocationRelativeTo(null);
-        addFrame.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        addFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         addFrame.setVisible(true);
     }
 
     // 展示查询最短路界面
     private void setFindPathFrame()
     {
+        findPathFrame = new JDialog();
         Container findPathFramePane = findPathFrame.getContentPane();
         findPathFrame.setTitle("请输入要查询的最短路的起点和终点词");
         findPathFrame.setSize(400,180);
@@ -399,7 +412,7 @@ public class MainPage extends JFrame
         findPathFramePane.add(findPathSubmit);
         findPathFrame.setLayout(null);
         findPathFrame.setLocationRelativeTo(null);
-        findPathFrame.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        findPathFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         findPathFrame.setVisible(true);
     }
 
@@ -449,7 +462,7 @@ public class MainPage extends JFrame
         infoBoard.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         infoBoard.setLocationRelativeTo(null);
         infoBoard.setSize(400, 300);
-        infoBoard.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        infoBoard.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         infoBoard.setVisible(true);
     }
 
@@ -465,6 +478,9 @@ public class MainPage extends JFrame
         setLocationRelativeTo(null);                // 居中显示
         setExtendedState(JFrame.MAXIMIZED_BOTH);    // 初始最大化
         setTextBoard("处理后的文本","读入的文本");
+
+        // FIX by review
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     private MainPage()
